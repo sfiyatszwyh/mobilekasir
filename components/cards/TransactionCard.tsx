@@ -1,24 +1,25 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
+import { useRouter } from 'expo-router';
 
-interface TransactionCardProps {
-  navigation: any;
-}
+const TransactionCard: React.FC = () => {
+  const router = useRouter();
 
-const TransactionCard: React.FC<TransactionCardProps> = ({ navigation }) => (
-  <Card>
-          <Card.Title>Transaksi Terbaru</Card.Title>
-          <Card.Divider />
-          <Text style={styles.cardText}>Hari Ini: 20 Transaksi</Text>
-          <Button
-            icon={<Icon name="money" type="font-awesome" color="#ffffff" />}
-            buttonStyle={styles.button}
-            title="Lihat Transaksi"
-            onPress={() => navigation.navigate('TransactionScreen')}
-          />
-  </Card>
-);
+  return (
+    <Card>
+      <Card.Title>Transaksi Terbaru</Card.Title>
+      <Card.Divider />
+      <Text style={styles.cardText}>Hari Ini: 20 Transaksi</Text>
+      <Button
+        icon={<Icon name="money" type="font-awesome" color="#ffffff" />}
+        buttonStyle={styles.button}
+        title="Lihat Transaksi"
+        onPress={() => router.push('/TransactionScreen')}
+      />
+    </Card>
+  );
+};
 
 const styles = StyleSheet.create({
   cardText: {
@@ -32,4 +33,3 @@ const styles = StyleSheet.create({
 });
 
 export default TransactionCard;
-
