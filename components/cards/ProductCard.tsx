@@ -11,11 +11,11 @@ const ProductCard: React.FC = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/product');
+        const response = await fetch('http://10.0.2.2:8000/api/product');
         const data = await response.json();
         setProductCount(data.length);
       } catch (error) {
-        console.error('Error fetching categories:', error);
+        console.error('Error fetching product:', error);
       }
     };
 

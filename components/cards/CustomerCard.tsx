@@ -11,11 +11,11 @@ const CustomerCard: React.FC = () => {
   useEffect(() => {
     const fetchCustomers = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/customer');
+        const response = await fetch('http://10.0.2.2:8000/api/customer');
         const data = await response.json();
         setCustomerCount(data.length);
       } catch (error) {
-        console.error('Error fetching categories:', error);
+        console.error('Error fetching customer:', error);
       }
     };
 

@@ -11,7 +11,7 @@ const CategoryCard: React.FC = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/cat');
+        const response = await fetch('http://10.0.2.2:8000/api/cat');
         const data = await response.json();
         setCategoryCount(data.length);
       } catch (error) {
