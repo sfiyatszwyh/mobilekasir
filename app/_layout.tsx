@@ -9,8 +9,9 @@ export default function RootLayout() {
       />
        <Stack.Screen name="CategoryScreen" options={{ title: 'Categories' }} />
        <Stack.Screen name="CustomerScreen" options={{ title: 'Customers' }} />
-       <Stack.Screen name="ProductScreen" options={{ title: 'Products' }} />
+       <Stack.Screen name="ProductScreen" options={{ title: 'Katalog Produk' }} />
        <Stack.Screen name="TransactionScreen" options={{ title: 'Transactions' }} />
+       <Stack.Screen name="TambahProdukScreen" options={{ title: 'Tambah Produk' }} />
     </Stack>
   );
 }

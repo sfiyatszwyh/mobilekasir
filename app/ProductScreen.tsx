@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, ActivityIndicator, TextInput, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 
 const ProductScreen = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const router = useRouter();
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -27,7 +28,7 @@ const ProductScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Products</Text>
+      <Text style={styles.header}>Katalog Produk</Text>
       <TextInput
         style={styles.searchInput}
         placeholder="Cari produk kamu disini"
@@ -47,14 +48,16 @@ const ProductScreen = () => {
               </View>
             </View>
             <TouchableOpacity style={styles.addButton}>
-              <Text style={styles.addButtonText}>Tambah</Text>
+              <Text style={styles.addButtonText}>Edit</Text>
             </TouchableOpacity>
           </View>
         )}
       />
-      <TouchableOpacity style={styles.mainButton}>
+      <TouchableOpacity style={styles.mainButton} 
+        onPress={() => router.push('/TambahProdukScreen')}>
         <Text style={styles.mainButtonText}>Tambah</Text>
       </TouchableOpacity>
+
     </View>
   );
 };
