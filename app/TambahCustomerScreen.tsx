@@ -1,40 +1,38 @@
+// TambahCustomerScreen.tsx
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 
-const TambahProdukScreen: React.FC = () => {
+const TambahCustomerScreen: React.FC = () => {
   const router = useRouter();
   const [name, setName] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
-  const [price, setPrice] = useState<string>('');
-  const [stock, setStock] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
 
   const handleSubmit = async () => {
-    if (!name || !price) {
-      Alert.alert('Error', 'Nama dan Harga harus diisi.');
+    if (!name) {
+      Alert.alert('Error', 'Nama pelanggan harus diisi.');
       return;
     }
 
     try {
-      const response = await fetch('http://10.0.2.2:8000/api/product', {
+      const response = await fetch('http://10.0.2.2:8000/api/customer', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           name,
-          description,
-          price: parseFloat(price),
-          stock: parseInt(stock) || 0, 
-          category_id: 1, 
+          phone,
+          address,
         }),
       });
 
       if (response.ok) {
-        Alert.alert('Sukses', 'Produk berhasil ditambahkan.');
+        Alert.alert('Sukses', 'Data pelanggan berhasil ditambahkan.');
         router.back(); 
       } else {
-        Alert.alert('Error', 'Gagal menambahkan produk.');
+        Alert.alert('Error', 'Gagal menambahkan pelanggan.');
       }
     } catch (error) {
       Alert.alert('Error', 'Terjadi kesalahan. Coba lagi.');
@@ -44,40 +42,31 @@ const TambahProdukScreen: React.FC = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Tambah Produk</Text>
+      <Text style={styles.title}>Tambah Pelanggan</Text>
 
       <Text style={styles.label}>Nama</Text>
       <TextInput
         style={styles.input}
-        placeholder="Contoh: Tahu Bulat"
+        placeholder="Masukkan nama pelanggan"
         value={name}
         onChangeText={setName}
       />
 
-      <Text style={styles.label}>Harga</Text>
+      <Text style={styles.label}>Telepon</Text>
       <TextInput
         style={styles.input}
-        placeholder="Rp 0"
-        keyboardType="numeric"
-        value={price}
-        onChangeText={setPrice}
+        placeholder="Masukkan nomor telepon"
+        keyboardType="phone-pad"
+        value={phone}
+        onChangeText={setPhone}
       />
 
-      <Text style={styles.label}>Stok</Text>
+      <Text style={styles.label}>Alamat</Text>
       <TextInput
         style={styles.input}
-        placeholder="di isi ya"
-        keyboardType="numeric"
-        value={stock}
-        onChangeText={setStock}
-      />
-
-      <Text style={styles.label}>Deskripsi</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Deskripsikan produk kamu"
-        value={description}
-        onChangeText={setDescription}
+        placeholder="Masukkan alamat pelanggan"
+        value={address}
+        onChangeText={setAddress}
         multiline
       />
 
@@ -88,7 +77,7 @@ const TambahProdukScreen: React.FC = () => {
   );
 };
 
-export default TambahProdukScreen;
+export default TambahCustomerScreen;
 
 const styles = StyleSheet.create({
   container: {

@@ -1,40 +1,34 @@
+
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 
-const TambahProdukScreen: React.FC = () => {
+const TambahKategoriScreen: React.FC = () => {
   const router = useRouter();
   const [name, setName] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
-  const [price, setPrice] = useState<string>('');
-  const [stock, setStock] = useState<string>('');
-
+  
   const handleSubmit = async () => {
-    if (!name || !price) {
-      Alert.alert('Error', 'Nama dan Harga harus diisi.');
+    if (!name) {
+      Alert.alert('Error', 'Nama kategori harus diisi.');
       return;
     }
 
     try {
-      const response = await fetch('http://10.0.2.2:8000/api/product', {
+      const response = await fetch('http://10.0.2.2:8000/api/cat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           name,
-          description,
-          price: parseFloat(price),
-          stock: parseInt(stock) || 0, 
-          category_id: 1, 
         }),
       });
 
       if (response.ok) {
-        Alert.alert('Sukses', 'Produk berhasil ditambahkan.');
+        Alert.alert('Sukses', 'Kategori berhasil ditambahkan.');
         router.back(); 
       } else {
-        Alert.alert('Error', 'Gagal menambahkan produk.');
+        Alert.alert('Error', 'Gagal menambahkan kategori.');
       }
     } catch (error) {
       Alert.alert('Error', 'Terjadi kesalahan. Coba lagi.');
@@ -44,41 +38,14 @@ const TambahProdukScreen: React.FC = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Tambah Produk</Text>
+      <Text style={styles.title}>Tambah Kategori</Text>
 
-      <Text style={styles.label}>Nama</Text>
+      <Text style={styles.label}>Nama Kategori</Text>
       <TextInput
         style={styles.input}
-        placeholder="Contoh: Tahu Bulat"
+        placeholder="Masukkan nama kategori"
         value={name}
         onChangeText={setName}
-      />
-
-      <Text style={styles.label}>Harga</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Rp 0"
-        keyboardType="numeric"
-        value={price}
-        onChangeText={setPrice}
-      />
-
-      <Text style={styles.label}>Stok</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="di isi ya"
-        keyboardType="numeric"
-        value={stock}
-        onChangeText={setStock}
-      />
-
-      <Text style={styles.label}>Deskripsi</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Deskripsikan produk kamu"
-        value={description}
-        onChangeText={setDescription}
-        multiline
       />
 
       <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
@@ -88,7 +55,7 @@ const TambahProdukScreen: React.FC = () => {
   );
 };
 
-export default TambahProdukScreen;
+export default TambahKategoriScreen;
 
 const styles = StyleSheet.create({
   container: {

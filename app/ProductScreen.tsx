@@ -47,7 +47,7 @@ const ProductScreen = () => {
                 <Text style={styles.productPrice}>Rp {item.price}</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.addButton}>
+            <TouchableOpacity style={styles.addButton}onPress={() => router.push(`/EditProdukScreen?id=${item.id}`)}>
               <Text style={styles.addButtonText}>Edit</Text>
             </TouchableOpacity>
           </View>
