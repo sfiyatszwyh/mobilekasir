@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Alert, Button } from 'react-native';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CategoryCard from '../components/cards/CategoryCard';
@@ -26,7 +26,19 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   
     checkLoginStatus();
   }, []);
-  
+
+  const handleLogout = async () => {
+    try {
+      // Hapus token dari AsyncStorage
+      await AsyncStorage.removeItem('token');
+      Alert.alert('Sukses', 'Anda telah logout.');
+      // Navigasi kembali ke halaman login
+      router.replace('/index');
+    } catch (error) {
+      console.error('Error saat logout:', error);
+      Alert.alert('Error', 'Terjadi kesalahan saat logout.');
+    }
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -38,6 +50,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         <ProductCard navigation={navigation} />
         <TransactionCard navigation={navigation} />
       </View>
+
+      {/* Tombol Logout */}
+      <Button title="Logout" onPress={handleLogout} color="#ff4d4d" />
     </ScrollView>
   );
 };

@@ -18,14 +18,14 @@ const LoginScreen = () => {
       const response = await fetch('http://10.0.2.2:8000/api/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json', Accept: 'application/json'
         },
         body: JSON.stringify({ email, password }),
       });
   
       const data = await response.json();
   
-      if (response.ok && data.status === 'success') {
+      if (response.ok && data.message === 'Login successful') {
         // Simpan token ke AsyncStorage
         await AsyncStorage.setItem('token', data.token); // Menyimpan token
         
@@ -39,7 +39,6 @@ const LoginScreen = () => {
       Alert.alert('Error', 'Terjadi kesalahan. Periksa koneksi internet Anda.');
     }
   };
-  
 
   return (
     <View style={styles.container}>
