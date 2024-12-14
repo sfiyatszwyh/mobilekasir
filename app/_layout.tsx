@@ -7,7 +7,7 @@ export default function RootLayout() {
         name="index" 
         options={{ headerShown: false }} 
       />
-      <Stack.Screen name="home" options={{ title: 'Home' }} />
+      <Stack.Screen name="home" options={{ title: 'Dashboard' }} />
        <Stack.Screen name="CategoryScreen" options={{ title: 'Kategori' }} />
        <Stack.Screen name="CustomerScreen" options={{ title: 'Pelanggan' }} />
        <Stack.Screen name="ProductScreen" options={{ title: 'Katalog Produk' }} />
